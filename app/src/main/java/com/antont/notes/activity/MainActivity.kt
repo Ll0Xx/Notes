@@ -1,21 +1,23 @@
 package com.antont.notes.activity
 
 import android.os.Bundle
-import android.view.Menu
+import android.widget.Toast
+import androidx.activity.viewModels
 import com.google.android.material.snackbar.Snackbar
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.antont.notes.NotesApplication
 import com.antont.notes.R
 import com.antont.notes.databinding.ActivityMainBinding
 import com.antont.notes.viewmodel.MainViewModel
+import com.antont.notes.viewmodel.MainViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val mainViewModel: MainViewModel by viewModels {
+        MainViewModelFactory((application as NotesApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +25,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val homeViewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
         setSupportActionBar(binding.toolbar)
 
-        homeViewModel.text.observe(this) {
+        mainViewModel.allNotes.observe(this){
+            Toast.makeText(this, "All date read, size: ${it.size}", Toast.LENGTH_SHORT).show()
+        }
+
+        mainViewModel.text.observe(this) {
             binding.content.textView.text = it
         }
 
