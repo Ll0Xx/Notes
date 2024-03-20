@@ -14,7 +14,7 @@ class MainViewModel(private val repository: NoteRepository) : ViewModel() {
     val allNotes: LiveData<List<Note>> = repository.allNotes.asLiveData()
 
     fun insert(note: Note) = CoroutineScope(Dispatchers.IO).launch {
-        repository.save(note)
+        repository.insert(note)
     }
 
     fun delete(noteId: Int) = CoroutineScope(Dispatchers.IO).launch {

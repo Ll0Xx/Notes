@@ -8,8 +8,8 @@ class NoteRepository(private val noteDao: NoteDao) {
 
     val allNotes: Flow<List<Note>> = noteDao.getAll()
 
-    fun save(note: Note) {
-        noteDao.save(note)
+    fun insert(note: Note) {
+        noteDao.insert(note)
     }
 
     fun delete(noteId: Int){
