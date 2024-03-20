@@ -25,7 +25,6 @@
 
     <style name="Theme.Notes.FullScreenDialog" parent="Theme.MaterialComponents.Light.Dialog">
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:textColor">@android:color/white</item>
         <item name="colorAccent">@color/colorSecondary</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="android:windowIsFloating">false</item>
@@ -37,5 +36,10 @@
     <style name="Theme.Notes.Slide">
         <item name="android:windowEnterAnimation">@anim/slide_up</item>
         <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
+
+    <style name="Theme.Notes.TextInputLayout" parent="TextAppearance.AppCompat">
+        <item name="hintTextColor">@color/textColorTitle</item>
+        <item name="android:textColorHint">@color/textColorTitleUnfocused</item>
     </style>
 </resources>

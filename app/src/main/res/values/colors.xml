@@ -5,4 +5,8 @@
     <color name="colorPrimaryVariant">#FF3700B3</color>
     <color name="colorSecondary">#FF03DAC5</color>
     <color name="colorSecondaryVariant">#FF018786</color>
+    <color name="textColorTitle">@android:color/black</color>
+    <color name="textColorTitleUnfocused">#7b7b7b</color>
+    <color name="textColorContent">@android:color/black</color>
+    <color name="noteDialogBackground">#262626</color>
 </resources>

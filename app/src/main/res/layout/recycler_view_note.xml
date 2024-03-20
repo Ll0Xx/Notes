@@ -20,7 +20,7 @@
             android:paddingStart="8dp"
             android:paddingTop="8dp"
             android:paddingEnd="8dp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textColorTitle"
             android:textSize="16sp"
             android:textStyle="bold"
             tools:text="test title" />
@@ -32,6 +32,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:paddingBottom="8dp"
+            android:textColor="@color/textColorContent"
             tools:text="test content" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
