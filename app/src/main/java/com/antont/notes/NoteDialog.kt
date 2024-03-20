@@ -2,9 +2,13 @@ package com.antont.notes
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.get
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.antont.notes.adapter.NotesRecyclerViewAdapter
@@ -15,6 +19,7 @@ import com.antont.notes.db.entity.Note
 class NoteDialog(
     private var title: String,
     private var note: Note? = null,
+    private var isDeleteButtonVisible: Boolean = false,
     private val listener: OnNoteDialogAction? = null
 ) : DialogFragment() {
     private lateinit var binding: NoteDialogBinding
@@ -52,17 +57,14 @@ class NoteDialog(
                 setNavigationOnClickListener { dismiss() }
                 setTitle(this@NoteDialog.title)
                 inflateMenu(R.menu.note_dialog)
+                menu.findItem(R.id.action_delete).setVisible(isDeleteButtonVisible)
                 setOnMenuItemClickListener { item ->
                     when (item.itemId) {
                         R.id.action_delete -> {
                             note?.let {
                                 listener?.delete(it.uid)
                             } ?: run {
-                                Toast.makeText(
-                                    view.context,
-                                    "Error during saving note",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText( view.context, "Error during saving note", Toast.LENGTH_SHORT).show()
                             }
                         }
 
@@ -100,7 +102,7 @@ class NoteDialog(
             fragmentManager: FragmentManager,
             listener: OnNoteDialogAction? = null
         ): NoteDialog {
-            val exampleDialog = NoteDialog("Edit Note", note, listener)
+            val exampleDialog = NoteDialog("Edit Note", note, isDeleteButtonVisible = true, listener = listener)
             exampleDialog.show(fragmentManager, TAG)
             return exampleDialog
         }
