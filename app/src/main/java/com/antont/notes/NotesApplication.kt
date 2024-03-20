@@ -7,9 +7,10 @@ import com.antont.notes.db.repository.NoteRepository
 
 class NotesApplication : Application() {
     val database by lazy {
-        Room.databaseBuilder(
-            this, AppDatabase::class.java, "notes_database"
-        ).build()
+        Room.databaseBuilder(this, AppDatabase::class.java, "notes_database")
+            .createFromAsset("database/notes_database.db")
+            .fallbackToDestructiveMigration()
+            .build()
     }
     val repository by lazy { NoteRepository(database.noteDao()) }
 }
